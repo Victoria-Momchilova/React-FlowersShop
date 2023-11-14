@@ -14,7 +14,6 @@ export default function CommentsEditModal(props) {
     const setEditHandler = (e) => {
         e.preventDefault();
         props.editNewComment(comment);
-        props.closeCommentsEditModalHandler();
     }
 
     useEffect(()=>{

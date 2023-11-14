@@ -44,7 +44,7 @@ export const setNewComment = async (data) => {
     const result = await response.json();
     console.log(result);
     return result;
-}
+};
 
 export const getEditComment = async (id) => {
     const response = await fetch(`${commentsURL}/comments/${id}`);
@@ -72,4 +72,13 @@ export const setEditComment = async (data) => {
 
     const result = await response.json();
     return result;
-}
+};
+
+export const deleteComment = async (id) => {
+    const response = await fetch(`${commentsURL}/comments/${id}`, {
+        method: 'DELETE'
+    });
+
+    const result = await response.json();
+    return result;
+};

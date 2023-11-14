@@ -23,9 +23,11 @@ export default function Comments(props) {
     const [commentEditModal, setCommentEditModal] = useState(false);
     const [commentDeleteModal, setCommentDeleteModal] = useState(false);
     const [commentEditModalID, setCommentEditModalID] = useState('');
+    const [commentDeleteModalID, setCommentDeleteModalID] = useState('');
     const [newCommentForm, setNewCommentForm] = useState(newCommentFormInitialState);
     const [errors, setErrors] = useState({});
 
+    // EDIT
     const commentEditModalHandler = (e, id) => {
         setCommentEditModal(state => !state);
         window.scrollTo(0, 0);
@@ -36,9 +38,9 @@ export default function Comments(props) {
         setCommentEditModal(false);
     }
 
-    const editNewComment = (data) => {
+    const editNewComment = async (data) => {
         
-        productService.setEditComment(data)
+        await productService.setEditComment(data)
             .then((result) => {
                 let nc = comments.map((item)=>{
                     if(item._id === result._id) {
@@ -49,8 +51,10 @@ export default function Comments(props) {
                 setComments(nc);
             })
             .catch(error=>console.log(error));
+        setCommentEditModal(false);
     }
 
+    // CREATE
     const newCommentHandler = (e) => {
         setNewCommentForm(state => ({
             ...state,
@@ -80,9 +84,7 @@ export default function Comments(props) {
         });
     }
 
-    
-
-    const addNewComment = (e) => {
+    const addNewComment = async (e) => {
         e.preventDefault();
         let validate = true;
         let validateErrors = [];
@@ -107,8 +109,7 @@ export default function Comments(props) {
         });
         
         if(validate) {
-            console.log(newCommentForm);
-            productService.setNewComment(newCommentForm)
+            await productService.setNewComment(newCommentForm)
                 .then(result => setComments(state => [...state, result]))
                 .catch(error => console.log(error));
             clearNewCommentForm();
@@ -117,12 +118,22 @@ export default function Comments(props) {
         }
     }
 
+    // DLELETE
     const commentDeleteModalHandler = (e, id) => {
         setCommentDeleteModal(state => !state);
         window.scrollTo(0, 0);
+        setCommentDeleteModalID(id);
     }
 
     const closeCommentsDeleteModalHandler = (e) => {
+        setCommentDeleteModal(false);
+    }
+
+    const deleteComment = async (e) => {
+        e.preventDefault();
+        await productService.deleteComment(commentDeleteModalID)
+            .then(result=>setComments(state=>state.filter(comment => comment._id !== commentDeleteModalID)))
+            .catch(error=>console.log(error));
         setCommentDeleteModal(false);
     }
 
@@ -136,7 +147,7 @@ export default function Comments(props) {
     return (
         <div className={`col-12 ` + styles["comments-wrap"]}>
             {commentEditModal && <CommentsEditModal editNewComment={editNewComment} commentEditModalID={commentEditModalID} closeCommentsEditModalHandler={closeCommentsEditModalHandler} />}
-            {commentDeleteModal && <CommentsDeleteModal closeCommentsDeleteModalHandler={closeCommentsDeleteModalHandler} />}
+            {commentDeleteModal && <CommentsDeleteModal deleteComment={deleteComment} closeCommentsDeleteModalHandler={closeCommentsDeleteModalHandler} />}
             {comments[0] && <div className={styles["heading"]}>Коментари:</div>}
             {comments[0] && comments.map((comment)=>{
                 return (
