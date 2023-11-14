@@ -1,0 +1,25 @@
+.homebanner {
+    padding-top: 65px;
+    padding-bottom: 50px;
+}
+
+.homebanner .slogan {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    font-family: Magnolia;
+    font-size: 60px;
+}
+
+.homebanner .separator {
+    width: 290px;
+    height: 2px;
+    background-color: black;
+}
+
+.homebanner .heading {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: Adys-bold, sans-serif;
+    font-size: 90px;
+    text-transform: uppercase;
+}

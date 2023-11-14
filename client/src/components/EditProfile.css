@@ -1,0 +1,16 @@
+.contact-form-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.contact-form-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.contact-form-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 15px;
+}

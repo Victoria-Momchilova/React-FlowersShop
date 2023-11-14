@@ -1,0 +1,21 @@
+.about-us-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.about-us-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.about-us-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.about-us-content h3 {
+    margin-top: 15px;
+    font-family: Magnolia;
+    font-size: 40px;
+}

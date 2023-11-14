@@ -1,0 +1,19 @@
+.product-label {
+    position: absolute;
+    top: 50px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #c086ca;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.product-label img {
+    margin: auto;
+    width: 70%;
+    height: 70%;
+}

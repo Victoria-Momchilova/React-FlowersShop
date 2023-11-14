@@ -1,0 +1,52 @@
+.contact-us-wrap {
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.contact-us-content {
+    margin: auto;
+    padding: 50px 50px 30px;
+    background-color: #ffffff;
+    border-radius: 50px;
+}
+
+.contact-us-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.contact-us-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.contact-us-content h3 {
+    margin-top: 15px;
+    font-family: Magnolia;
+    font-size: 40px;
+}
+
+.contact-us-content .contact-us-box {
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    margin-bottom: 20px;
+}
+
+.contact-us-content .contact-us-box .img-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.contact-us-content .contact-us-box .img-wrap img {
+    width: 100%;
+    max-width: 50px;
+}
+
+.contact-us-content .contact-us-box input {
+    margin-bottom: 10px;
+    width: 100%;
+}

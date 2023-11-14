@@ -1,0 +1,43 @@
+.modal-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+.modal-wrap .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.modal-wrap .closedelete {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    text-decoration: none!important;
+    font-size: 22px!important;
+}
+
+.modal-wrap .modal-box {
+    position: relative;
+    margin-top: 65px;
+    width: 600px;
+    z-index: 2;
+}
+
+.modal-wrap .modal-box .text {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.modal-wrap .modal-box .white {
+    margin-left: 15px;
+}

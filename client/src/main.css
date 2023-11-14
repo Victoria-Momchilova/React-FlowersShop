@@ -1,0 +1,9 @@
+@font-face { font-family: Cera; src: url('/fonts/Cera Pro Light.otf'); } 
+@font-face { font-family: Cera-bold; src: url('/fonts/Cera Pro Bold.otf'); } 
+@font-face { font-family: Cera-black; src: url('/fonts/Cera Pro Black.otf'); } 
+@font-face { font-family: Magnolia; src: url('/fonts/Magnolia.ttf'); } 
+@font-face { font-family: Adys-bold; src: url('/fonts/ADYS-Bold-V5-4.ttf'); } 
+
+body {
+    font-family: Cera, sans-serif;
+}

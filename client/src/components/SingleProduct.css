@@ -1,0 +1,75 @@
+.singleproduct-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.singleproduct-wrap .singleproduct-content .images-wrap img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border: 1px solid #cecece;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #7d2b8b;
+    margin-bottom: 15px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .price-wrap {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .price-wrap .price {
+    font-size: 30px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .quantity-wrap {
+    margin-bottom: 15px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .quantity-wrap label {
+    margin-right: 8px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .quantity-wrap input {
+    max-width: 65px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .btn-wrap {
+    margin-bottom: 15px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .info {
+    margin-bottom: 20px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .info .infoheading {
+    font-size: 22px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .info .description {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .info .features .feature-box {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    font-size: 18px;
+}
+
+.singleproduct-wrap .singleproduct-content .info-wrap .info .features .feature-box .img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+

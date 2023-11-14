@@ -1,0 +1,102 @@
+.shopping-cart-wrap {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    width: 700px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    z-index: 99;
+}
+
+.shopping-cart-wrap .closecart {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    text-decoration: none!important;
+    font-size: 22px!important;
+}
+
+.shopping-cart-wrap .shopping-cart-content {
+    max-height: calc(100vh - 170px);
+}
+
+.shopping-cart-wrap .heading-wrap h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.shopping-cart-wrap .heading-wrap .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.shopping-cart-wrap .shopping-cart {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    max-height: calc(100vh - 303px);
+    overflow-y: auto;
+}
+
+.shopping-cart-wrap .shopping-cart .empty {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap + .cart-product-wrap {
+    border-top: 1px solid #cecece;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #cecece;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-name {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-quantity-wrap {
+    margin-left: auto;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-quantity-wrap .cart-product-quantity-label {
+    margin-right: 5px;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-quantity-wrap .cart-product-quantity {
+    width: 60px;
+}
+
+.shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-price {
+    margin-left: 10px;
+    margin-right: 5px;
+    font-size: 20px;
+    min-width: 64px;
+    text-align: right;
+}
+
+.shopping-cart-wrap .shopping-cart-total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-top: 3px solid #cecece;
+}
+
+.shopping-cart-wrap .shopping-cart-total .price {
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

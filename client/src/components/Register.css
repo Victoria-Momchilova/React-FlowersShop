@@ -1,0 +1,19 @@
+.register-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.register-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.register-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.register-content form {
+    margin-top: 25px;
+}

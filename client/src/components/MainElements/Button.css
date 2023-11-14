@@ -1,0 +1,25 @@
+.button {
+    /* margin: auto; */
+    padding: 10px 20px;
+    background-color: #7d2b8b;
+    border: 1px solid #7d2b8b;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: Cera, sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.button.white {
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: underline;
+    color: #7d2b8b;
+}
+
+.button.small {
+    padding: 4px 8px;
+    font-size: 14px;
+}

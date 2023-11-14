@@ -1,0 +1,20 @@
+.contact-form .form-section-heading {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #cecece;    
+}
+
+.contact-form .form-group {
+    margin-bottom: 10px;
+}
+
+.contact-form .input-error {
+    font-size: 12px;
+    color: red;
+}
+
+.contact-form .mandatory {
+    color: red;
+}

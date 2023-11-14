@@ -1,0 +1,33 @@
+.featured-products {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #ffffff;
+}
+
+.featured-products .heading-wrap {
+    margin: auto;
+    padding: 0 50px;
+}
+
+.featured-products .heading-wrap h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.featured-products .heading-wrap .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.featured-products .heading-wrap h3 {
+    margin-top: 15px;
+    font-family: Magnolia;
+    font-size: 40px;
+}
+
+.featured-products .button-wrap {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
