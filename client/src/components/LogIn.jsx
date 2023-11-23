@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import WhiteBg from './MainElements/WhiteBg'
 import Button from './MainElements/Button'
 import styles from './LogIn.module.css'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import AuthContext from '../contexts/authContext'
 
 const formInitialState = {
     email: '',
@@ -10,6 +11,7 @@ const formInitialState = {
 }
 
 export default function LogIn(props) {
+    const {loginSubmitHandler} = useContext(AuthContext);
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
 
@@ -18,11 +20,19 @@ export default function LogIn(props) {
     }
 
     const changeHandler = (e) => {
-
+        setFormValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }));
     }
 
     const validateInput = (e) => {
 
+    }
+
+    const onLogIn = async (e) => {
+        e.preventDefault();
+        loginSubmitHandler(formValues);
     }
 
     return (
@@ -57,7 +67,7 @@ export default function LogIn(props) {
                     />
                     {errors.password && <div className="input-error">Въвели сте грешна парола</div>}
                 </div>
-                <Button text="Влез" />
+                <Button handleButton={onLogIn} text="Влез" />
                 <span> или <Link to="/register"><Button text="се регистрирай" className="white" /></Link></span>
             </form>
         </WhiteBg>

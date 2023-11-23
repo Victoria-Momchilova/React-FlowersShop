@@ -26,7 +26,7 @@ export const setNewComment = async (data) => {
     });
 
     const result = await response.json();
-    console.log(result);
+    
     return result;
 };
 

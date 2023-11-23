@@ -7,15 +7,17 @@ import Profile from './pages/Profile.jsx'
 import Registerpage from './pages/Registerpage.jsx'
 import Footer from './components/Footer.jsx'
 import * as productService from './services/productService.js'
+import * as authService from './services/authService.js'
 import { useState, useEffect } from "react";
 import { Route, Routes } from 'react-router-dom'
+import AuthContext from './contexts/authContext.js'
 
 
 function App() {
+  // Products
   const [shuffleProducts, setShuffleProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
  
-
   const removeProduct = (id) => {
     const remainedProducts = cartProducts.filter((product)=>{
         return product.product.id != id;
@@ -76,28 +78,46 @@ function App() {
       .catch(error => console.log(error));
   }, []);
 
+  // Auth
+  const [auth, setAuth] = useState({});
+
+  const loginSubmitHandler = async (values) => {
+    await authService.login(values)
+      .then(result => setAuth(result))
+      .catch(error => console.log(error));
+      console.log(auth);
+  }
+
+  const autValues = {
+    loginSubmitHandler,
+    username: auth.username,
+    isAuth: !!auth.email,
+  }
+
   return (
     <div>
-      <Header 
-        products={shuffleProducts} 
-        onClickRemoveFromCart={removeProduct} 
-        cartProducts={cartProducts} 
-        setQuantity={setQuantity}
-      />
-      <MainBackground />
-      <Routes>
-        <Route path='/' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />}/>
-        <Route path='/about-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
-        <Route path='/contact-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
-        <Route path='/products' element={<Store products={shuffleProducts} onClickProduct={addProduct} />} />
-        <Route path='/products/:id' element={<Productpage onClickProduct={addProduct}/>} />
-        <Route path='/register' element={<Registerpage />} />
-      </Routes>
-      {/* <Profile /> */}
-      
-      
-      
-      <Footer />
+      <AuthContext.Provider value={autValues}>
+        <Header 
+          products={shuffleProducts} 
+          onClickRemoveFromCart={removeProduct} 
+          cartProducts={cartProducts} 
+          setQuantity={setQuantity}
+        />
+        <MainBackground />
+        <Routes>
+          <Route path='/' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />}/>
+          <Route path='/about-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
+          <Route path='/contact-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
+          <Route path='/products' element={<Store products={shuffleProducts} onClickProduct={addProduct} />} />
+          <Route path='/products/:id' element={<Productpage onClickProduct={addProduct}/>} />
+          <Route path='/register' element={<Registerpage />} />
+        </Routes>
+        {/* <Profile /> */}
+        
+        
+        
+        <Footer />
+      </AuthContext.Provider>
     </div>
   )
 }

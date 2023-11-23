@@ -18,7 +18,6 @@ const formRegex = {
 }
 
 export default function Comments(props) {
-    // TODO delete comment
     const [comments, setComments] = useState([]);
     const [commentEditModal, setCommentEditModal] = useState(false);
     const [commentDeleteModal, setCommentDeleteModal] = useState(false);

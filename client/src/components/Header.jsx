@@ -3,13 +3,17 @@ import './Header.css'
 import HeaderMenu from './HeaderMenu';
 import ShoppingCart from './ShoppingCart'
 import LogIn from './LogIn';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from '../contexts/authContext';
+import ProfileMenu from './ProfileMenu';
 
 
 export default function Header(props) {
+    const {username, isAuth} = useContext(AuthContext);
     const [cartOpened, setCartOpened] = useState(false);
     const [headerMenuOpened, setHeaderMenuOpened] = useState(false);
     const [logInOpened, setLogInOpened] = useState(false);
+    const [profileOpend, setProfileOpened] = useState(false);
     const [cartProductsCount, setCartProductsCount] = useState(0);
 
     const cartClicked = () => {
@@ -40,6 +44,12 @@ export default function Header(props) {
     const logInCloseClicked = () => {
         setLogInOpened(false);
     }
+    const profileClicked = () => {
+        setProfileOpened(!profileOpend);
+    }
+    const profileCloseClicked = () => {
+        setProfileOpened(false);
+    }
 
     useEffect(()=>{
         calcCartProductsCount();
@@ -55,10 +65,14 @@ export default function Header(props) {
                         </Link>
                     </div>
                     <div className="header-menu col-10">
-                        <div className='menu-item' onClick={logInClicked}>
+                        {!isAuth && <div className='menu-item' onClick={logInClicked}>
                             <img src='/images/Header/login.svg' alt='login' />
                             <span>Вход</span>
-                        </div>
+                        </div>}
+                        {isAuth && <div className='menu-item' onClick={profileClicked}>
+                            <img src='/images/Header/profile.svg' alt='profile' />
+                            <span>{username}</span>
+                        </div>}
                         <div className='menu-item bag' onClick={cartClicked}>
                             <img src='/images/Header/bag.svg' alt='bag' className='bag' />
                             <span>{cartProductsCount}</span>
@@ -78,6 +92,8 @@ export default function Header(props) {
             />}
             {headerMenuOpened && <HeaderMenu headerMenuCloseClicked={headerMenuCloseClicked}/>}
             {logInOpened && <LogIn logInCloseClicked={logInCloseClicked}/>}
+            {/* // TODO Profile menu links */}
+            {profileOpend && <ProfileMenu profileCloseClicked={profileCloseClicked}/>}
         </header>
     )
 }
