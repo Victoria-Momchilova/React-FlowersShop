@@ -27,7 +27,6 @@ function App() {
   }
 
   const addProduct = (product) => {
-    console.log('app');
     let findProduct = shuffleProducts.filter((p)=>{
       return p.id === product.id;
     });
@@ -85,11 +84,18 @@ function App() {
     await authService.login(values)
       .then(result => setAuth(result))
       .catch(error => console.log(error));
-      console.log(auth);
+  }
+
+  const registerSubmitHandler = async (values) => {
+    console.log(values);
+    await authService.register(values)
+      .then(result=>setAuth(result))
+      .catch(error => console.log(error));
   }
 
   const autValues = {
     loginSubmitHandler,
+    registerSubmitHandler,
     username: auth.username,
     isAuth: !!auth.email,
   }

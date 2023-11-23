@@ -12,7 +12,7 @@ const formInitialState = {
     city: '',
     street: '',
     streetNumber: '',
-    sameAddress: false,
+    sameAddress: true,
     shippingcountry: '',
     shippingcity: '',
     shippingstreet: '',
@@ -36,6 +36,7 @@ const formRegex = {
 }
 
 export default function ContactForm(props) {
+    
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const [shippingAddress, setShippingAddress] = useState(false);
@@ -78,7 +79,6 @@ export default function ContactForm(props) {
 
     const validateInput = (e) => {
         if(e.target.type === 'password' && e.target.value != formValues.repeatpassword) {
-            console.log('here');
             setErrors(state => ({
                 ...state,
                 repeatpassword: true
@@ -119,7 +119,7 @@ export default function ContactForm(props) {
         
         setFormValues(state => ({
             ...state,
-            [e.target.name]: e.target.checked
+            [e.target.name]: !e.target.checked
         }));
     }
 
@@ -149,7 +149,7 @@ export default function ContactForm(props) {
         });
         
         if(validate) {
-            console.log(formValues);
+            props.onSubmitHandler(formValues);
         } else {
             $('input[name=' + validateErrors[0] + ']').focus();
         }
@@ -297,7 +297,7 @@ export default function ContactForm(props) {
                         type="checkbox"
                         id="sameAddress"
                         name="sameAddress"
-                        checked={formValues.sameAddress}
+                        checked={!formValues.sameAddress}
                         onChange={shippingAddressHandler}
                     />
                     <label className="form-check-label" htmlFor="sameAddress">
