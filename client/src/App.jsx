@@ -9,7 +9,7 @@ import Footer from './components/Footer.jsx'
 import * as productService from './services/productService.js'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from "react";
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import AuthContext from './contexts/authContext.js'
 
 
@@ -78,6 +78,7 @@ function App() {
   }, []);
 
   // Auth
+  const navigate = useNavigate();
   const [auth, setAuth] = useState({});
 
   const loginSubmitHandler = async (values) => {
@@ -87,16 +88,16 @@ function App() {
   }
 
   const registerSubmitHandler = async (values) => {
-    console.log(values);
     await authService.register(values)
       .then(result=>setAuth(result))
       .catch(error => console.log(error));
+    navigate('/');
   }
 
   const autValues = {
     loginSubmitHandler,
     registerSubmitHandler,
-    username: auth.username,
+    ...auth,
     isAuth: !!auth.email,
   }
 

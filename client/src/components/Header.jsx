@@ -55,6 +55,12 @@ export default function Header(props) {
         calcCartProductsCount();
     }, [props.cartProducts]);
 
+    useEffect(()=>{
+        if(isAuth){
+            setLogInOpened(false);
+        }
+    }, [isAuth]);
+
     return (
         <header className='header-wrap'>
             <div className='container-fluid'>
