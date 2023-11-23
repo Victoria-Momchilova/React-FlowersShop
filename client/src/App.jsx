@@ -94,9 +94,16 @@ function App() {
     navigate('/');
   }
 
+  const logoutSubmitHandler = async () => {
+    await authService.logout(auth.accessToken)
+      .then(result=>setAuth({}))
+      .catch(error => console.log(error));
+  }
+
   const autValues = {
     loginSubmitHandler,
     registerSubmitHandler,
+    logoutSubmitHandler,
     ...auth,
     isAuth: !!auth.email,
   }

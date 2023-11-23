@@ -50,3 +50,13 @@ export const register = async (data) => {
 
     return result;
 };
+
+export const logout = async (token) => {
+    const response = await fetch(`${baseURL}/logout`, {
+        headers: {
+            'X-Authorization': token,
+        },
+    });
+
+    return response;
+}
