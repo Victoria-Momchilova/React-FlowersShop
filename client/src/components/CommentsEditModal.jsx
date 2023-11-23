@@ -2,7 +2,7 @@ import WhiteBg from "./MainElements/WhiteBg";
 import Button from "./MainElements/Button";
 import './CommentsEditModal.css';
 import { useEffect, useState } from "react";
-import * as productService from '../services/productService'
+import * as commentService from '../services/commentService'
 
 export default function CommentsEditModal(props) {
     const [comment, setComment] = useState({});
@@ -17,7 +17,7 @@ export default function CommentsEditModal(props) {
     }
 
     useEffect(()=>{
-        productService.getEditComment(props.commentEditModalID)
+        commentService.getEditComment(props.commentEditModalID)
             .then(result => setComment(result))
             .catch(error=>console.log(error));
     }, [props.commentEditModalID]);

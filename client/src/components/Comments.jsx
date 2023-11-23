@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Comments.module.css';
 import Button from './MainElements/Button';
-import * as productService from '../services/productService'
+import * as commentService from '../services/commentService'
 import CommentsEditModal from './CommentsEditModal';
 import CommentsDeleteModal from './CommentsDeleteModal';
 
@@ -40,7 +40,7 @@ export default function Comments(props) {
 
     const editNewComment = async (data) => {
         
-        await productService.setEditComment(data)
+        await commentService.setEditComment(data)
             .then((result) => {
                 let nc = comments.map((item)=>{
                     if(item._id === result._id) {
@@ -109,7 +109,7 @@ export default function Comments(props) {
         });
         
         if(validate) {
-            await productService.setNewComment(newCommentForm)
+            await commentService.setNewComment(newCommentForm)
                 .then(result => setComments(state => [...state, result]))
                 .catch(error => console.log(error));
             clearNewCommentForm();
@@ -131,14 +131,14 @@ export default function Comments(props) {
 
     const deleteComment = async (e) => {
         e.preventDefault();
-        await productService.deleteComment(commentDeleteModalID)
+        await commentService.deleteComment(commentDeleteModalID)
             .then(result=>setComments(state=>state.filter(comment => comment._id !== commentDeleteModalID)))
             .catch(error=>console.log(error));
         setCommentDeleteModal(false);
     }
 
     useEffect(()=>{
-        productService.getAllComments()
+        commentService.getAllComments()
             .then(result => setComments(result.filter(item=>item.productId===props.productId)))
             .catch(error => console.log(error));
         setNewCommentForm({...newCommentForm, productId: props.productId})
