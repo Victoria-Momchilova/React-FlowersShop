@@ -50,13 +50,14 @@ export default function ShoppingCart(props) {
                 </div>
                 <div className="shopping-cart">
                     {cartProducts.length === 0 ? <div className='empty'>Чантата е празна!</div> : cartProducts.map(({product, quantity}, index)=>{
+                        console.log(product);
                         return (
                             <div className='cart-product-wrap' key={product.id}>
                                 <img src={`/${product.imageurl}`}/>
                                 <div className='cart-product-name'>{product.name}</div>
                                 <div className='cart-product-quantity-wrap'>
-                                    <label className='cart-product-quantity-label' htmlFor="quantity">Брой:</label>
-                                    <input className='cart-product-quantity' type="number" id='' name='quantity' value={quantity} onChange={(e)=>{changeQuantity(e, product.id)}}/>
+                                    <label className='cart-product-quantity-label' htmlFor={"quantity-"+product.id}>Брой:</label>
+                                    <input className='cart-product-quantity' type="number" id={"quantity-"+product.id} name='quantity' value={quantity} onChange={(e)=>{changeQuantity(e, product.id)}}/>
                                 </div>
                                 <div className='cart-product-price'>{product.price}</div>
                                 <Button handleButton={()=>{removeProductHandler(product.id)}} className="close small white" text="x"/>
