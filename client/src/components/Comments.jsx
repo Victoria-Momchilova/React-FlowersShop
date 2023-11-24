@@ -4,20 +4,23 @@ import Button from './MainElements/Button';
 import * as commentService from '../services/commentService'
 import CommentsEditModal from './CommentsEditModal';
 import CommentsDeleteModal from './CommentsDeleteModal';
+import { useContext } from 'react';
+import AuthContext from '../contexts/authContext';
 
 const newCommentFormInitialState = {
     productId: "",
-    name: "",
+    // name: "",
     imageurl: "/images/Comments/person.svg",
     text: ""
 }
 
 const formRegex = {
-    name: /([\s\S]{3,})/,
+    // name: /([\s\S]{3,})/,
     text: /([\s\S]{2,})/
 }
 
 export default function Comments(props) {
+    const {isAuth, accessToken, _id, username} = useContext(AuthContext);
     const [comments, setComments] = useState([]);
     const [commentEditModal, setCommentEditModal] = useState(false);
     const [commentDeleteModal, setCommentDeleteModal] = useState(false);
@@ -39,7 +42,7 @@ export default function Comments(props) {
 
     const editNewComment = async (data) => {
         
-        await commentService.setEditComment(data)
+        await commentService.setEditComment(data, accessToken)
             .then((result) => {
                 let nc = comments.map((item)=>{
                     if(item._id === result._id) {
@@ -108,8 +111,8 @@ export default function Comments(props) {
         });
         
         if(validate) {
-            await commentService.setNewComment(newCommentForm)
-                .then(result => setComments(state => [...state, result]))
+            await commentService.setNewComment(newCommentForm, accessToken)
+                .then(result => setComments(state => [...state, { ...result, owner: {username: username} }]))
                 .catch(error => console.log(error));
             clearNewCommentForm();
         } else {
@@ -130,48 +133,48 @@ export default function Comments(props) {
 
     const deleteComment = async (e) => {
         e.preventDefault();
-        await commentService.deleteComment(commentDeleteModalID)
+        await commentService.deleteComment(commentDeleteModalID, accessToken)
             .then(result=>setComments(state=>state.filter(comment => comment._id !== commentDeleteModalID)))
             .catch(error=>console.log(error));
         setCommentDeleteModal(false);
     }
 
     useEffect(()=>{
-        commentService.getAllComments()
-            .then(result => setComments(result.filter(item=>item.productId===props.productId)))
+        commentService.getAllComments(props.productId)
+            .then(result => setComments(result))
             .catch(error => console.log(error));
         setNewCommentForm({...newCommentForm, productId: props.productId})
     }, [props.productId]);
     
     return (
-        <div className={`col-12 ` + styles["comments-wrap"]}>
+        <div className={`col-12 ` + styles["comments-wrap"]} style={isAuth || comments[0] ? {borderTop: "2px solid #cecece"} : {}}>
             {commentEditModal && <CommentsEditModal editNewComment={editNewComment} commentEditModalID={commentEditModalID} closeCommentsEditModalHandler={closeCommentsEditModalHandler} />}
             {commentDeleteModal && <CommentsDeleteModal deleteComment={deleteComment} closeCommentsDeleteModalHandler={closeCommentsDeleteModalHandler} />}
             {comments[0] && <div className={styles["heading"]}>Коментари:</div>}
             {comments[0] && comments.map((comment)=>{
                 return (
                     <div className={styles["comment-box"]} key={comment._id}>
-                        <div className={styles["control"]}>
+                        {comment._ownerId === _id && <div className={styles["control"]}>
                             <div className={styles["edit"]} onClick={(e)=>commentEditModalHandler(e, comment._id)}><img className={styles["control-img"]} src='/images/Comments/edit.svg'/></div>
                             <div className={styles["delete"]} onClick={(e)=>commentDeleteModalHandler(e, comment._id)}><img className={styles["control-img"]} src='/images/Comments/delete.svg'/></div>
-                        </div>
+                        </div>}
                         <div className={styles["person"]}>
-                            <img className={styles["img"]} src={comment.imageurl} alt={"Снимката на " + comment.name} title={"Снимката на " + comment.name} />
-                            <div className={styles["name"]}>{comment.name}</div>
+                            <img className={styles["img"]} src={comment.imageurl} alt={"Снимката на " + comment.owner.username} title={"Снимката на " + comment.owner.username} />
+                            <div className={styles["name"]}>{comment.owner.username}</div>
                         </div>
                         <div className={styles["comment"]}>{comment.text}</div>
                     </div>
                 )
             })}
            
-            <div className={styles["new-comment-box"]}>
+            {isAuth && <div className={styles["new-comment-box"]}>
                 <div className={styles["heading"]}>Напиши коментар:</div>
                 <form className="form-add-comment">
-                    <div className={'form-group ' + styles["form-group"]}>
+                    {/* <div className={'form-group ' + styles["form-group"]}>
                         <label htmlFor='name'>Име: <span className={styles["mandatory"]}>*</span></label>
                         <input className={styles["name"] + " form-control"} type='text' id='name' name='name' onChange={newCommentHandler} onBlur={validateInput} value={newCommentForm.name} />
                         {errors.name && <div className={styles["input-error"]}>Името трябва да е над 2 символа</div>}
-                    </div>
+                    </div> */}
                     <div className={'form-group ' + styles["form-group"]}>
                         <label htmlFor='addcomment'>Коментар: <span className={styles["mandatory"]}>*</span></label>
                         <textarea className={styles["text"] + ` form-control`} id="addcomment" name="text" rows="4" onChange={newCommentHandler} onBlur={validateInput} value={newCommentForm.text}/>
@@ -180,7 +183,7 @@ export default function Comments(props) {
               
                     <Button handleButton={addNewComment} text="Добави коментар" />
                 </form>              
-            </div>
+            </div>}
 
 
         </div>                            
