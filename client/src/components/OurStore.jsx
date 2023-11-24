@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import WhiteBg from "./MainElements/WhiteBg.jsx"
 import Product from './MainElements/Product.jsx'
 import Button from "./MainElements/Button.jsx";
 import './OurStore.css'
 import products from "../assets/products.js";
+import ProductsContext from "../contexts/productsContext.js";
 
 export default function OurStore(props) {
+    const {products} = useContext(ProductsContext);
     const [categories, setCategories] = useState([
         {id: 'outdoorBtn', value: 'outdoor', text: 'Градински цветя', isChacked: true, hasSubCat: true },
         {id: 'indoorBtn', value: 'indoor', text: 'Стайни цветя', isChacked: false, hasSubCat: true },
@@ -115,8 +117,6 @@ export default function OurStore(props) {
     }
 
     useEffect(()=>{
-        let products = props.products;
-
         if(searchInput.length > 0) {
             setFilteredProducts(products.filter((product)=>{
                 return product.name.toLowerCase().match(searchInput.toLowerCase());
@@ -134,7 +134,7 @@ export default function OurStore(props) {
             }
         }
        
-    }, [activeCategories, activeSubCategories, searchInput, props.products]);
+    }, [activeCategories, activeSubCategories, searchInput, products]);
 
     return (
         <section className="our-store-wrap">

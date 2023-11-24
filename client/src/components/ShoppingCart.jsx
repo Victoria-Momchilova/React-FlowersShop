@@ -1,14 +1,16 @@
 import './ShoppingCart.css'
 import WhiteBg from "./MainElements/WhiteBg.jsx"
 import Button from './MainElements/Button'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import ProductsContext from '../contexts/productsContext.js'
 
 export default function ShoppingCart(props) {
+    const {cartProductsVal, addProduct, removeProduct, setQuantity} = useContext(ProductsContext);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
     const removeProductHandler = (id) => {
-        props.removeProduct(id);
+        removeProduct(id);
     }
 
     const closeCartHandler = () => {
@@ -27,12 +29,12 @@ export default function ShoppingCart(props) {
     }
 
     const changeQuantity = (e, id) => {
-        props.setQuantity(id, Number(e.target.value));
+        setQuantity(id, Number(e.target.value));
     }   
     
     useEffect(()=>{
-        setCartProducts(props.cartProducts);
-    }, [props.cartProducts]);
+        setCartProducts(cartProductsVal);
+    }, [cartProductsVal]);
 
     useEffect(()=>{
         sumCartProductsPrice();

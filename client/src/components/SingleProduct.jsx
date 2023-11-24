@@ -3,9 +3,11 @@ import Button from "./MainElements/Button"
 import WhiteBg from "./MainElements/WhiteBg"
 import './SingleProduct.css'
 import * as productService from '../services/productService'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import ProductsContext from "../contexts/productsContext"
 
 export default function SingleProduct(props) {
+    const {addProduct} = useContext(ProductsContext);
     const [product, setProduct] = useState({
         "moreinfo": {}
     });
@@ -18,7 +20,7 @@ export default function SingleProduct(props) {
 
     const addToCart = (event, id) => {
         let product = {'id': id, 'quantity': Number(productCount) };
-        props.onClickProduct(product);
+        addProduct(product);
     }
 
     useEffect(()=>{

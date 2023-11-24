@@ -11,6 +11,7 @@ import * as authService from './services/authService.js'
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import AuthContext from './contexts/authContext.js'
+import ProductsContext from './contexts/productsContext.js'
 
 
 function App() {
@@ -108,29 +109,34 @@ function App() {
     isAuth: !!auth.email,
   }
 
+  const productsValues = {
+    products: shuffleProducts,
+    cartProductsVal: cartProducts,
+    addProduct,
+    removeProduct,
+    setQuantity
+  }
+
   return (
     <div>
       <AuthContext.Provider value={autValues}>
-        <Header 
-          products={shuffleProducts} 
-          onClickRemoveFromCart={removeProduct} 
-          cartProducts={cartProducts} 
-          setQuantity={setQuantity}
-        />
-        <MainBackground />
-        <Routes>
-          <Route path='/' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />}/>
-          <Route path='/about-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
-          <Route path='/contact-us' element={<Homepage products={shuffleProducts} onClickProduct={addProduct} />} />
-          <Route path='/products' element={<Store products={shuffleProducts} onClickProduct={addProduct} />} />
-          <Route path='/products/:id' element={<Productpage onClickProduct={addProduct}/>} />
-          <Route path='/register' element={<Registerpage />} />
-        </Routes>
-        {/* <Profile /> */}
-        
-        
-        
-        <Footer />
+        <ProductsContext.Provider value={productsValues}>
+          <Header />
+          <MainBackground />
+          <Routes>
+            <Route path='/' element={<Homepage />}/>
+            <Route path='/about-us' element={<Homepage />} />
+            <Route path='/contact-us' element={<Homepage />} />
+            <Route path='/products' element={<Store />} />
+            <Route path='/products/:id' element={<Productpage />} />
+            <Route path='/register' element={<Registerpage />} />
+          </Routes>
+          {/* <Profile /> */}
+          
+          
+          
+          <Footer />
+        </ProductsContext.Provider>
       </AuthContext.Provider>
     </div>
   )

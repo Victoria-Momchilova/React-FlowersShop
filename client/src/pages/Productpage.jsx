@@ -3,15 +3,12 @@ import ContactUs from '../components/ContactUs.jsx';
 import SingleProduct from '../components/SingleProduct.jsx'
 import { useParams } from 'react-router-dom'
 
-export default function Poductpage(props) {
+export default function Poductpage() {
     const {id} = useParams();
-    const ClickedProduct = (addedProduct) => {
-        props.onClickProduct(addedProduct);
-    }
 
     return (
         <div className="page-wrap">
-           <SingleProduct id={id} onClickProduct={ClickedProduct}/>
+           <SingleProduct id={id} />
            <ContactUs />
         </div>
     )

@@ -6,9 +6,11 @@ import LogIn from './LogIn';
 import { useState, useEffect, useContext } from "react";
 import AuthContext from '../contexts/authContext';
 import ProfileMenu from './ProfileMenu';
+import ProductsContext from '../contexts/productsContext';
 
 
-export default function Header(props) {
+export default function Header() {
+    const {cartProductsVal} = useContext(ProductsContext);
     const {username, isAuth} = useContext(AuthContext);
     const [cartOpened, setCartOpened] = useState(false);
     const [headerMenuOpened, setHeaderMenuOpened] = useState(false);
@@ -24,13 +26,10 @@ export default function Header(props) {
     }
     const calcCartProductsCount = () => {
         let counts = [];
-        props.cartProducts.forEach((p)=>{
+        cartProductsVal.forEach((p)=>{
             counts.push(p.quantity);
         });
         setCartProductsCount(counts.reduce((a, b) => a + b, 0));
-    }
-    const setQuantity = (id, newquantity) => {
-        props.setQuantity(id, newquantity);
     }
     const headerMenuClicked = () => {
         setHeaderMenuOpened(!headerMenuOpened);
@@ -53,7 +52,7 @@ export default function Header(props) {
 
     useEffect(()=>{
         calcCartProductsCount();
-    }, [props.cartProducts]);
+    }, [cartProductsVal]);
 
     useEffect(()=>{
         if(isAuth){
@@ -90,11 +89,7 @@ export default function Header(props) {
                 </div>
             </div>
             {cartOpened && <ShoppingCart 
-                products={props.products} 
-                removeProduct={props.onClickRemoveFromCart} 
-                cartProducts={props.cartProducts} 
-                cartCloseClicked={cartCloseClicked} 
-                setQuantity={setQuantity}
+               cartCloseClicked={cartCloseClicked} 
             />}
             {headerMenuOpened && <HeaderMenu headerMenuCloseClicked={headerMenuCloseClicked}/>}
             {logInOpened && <LogIn logInCloseClicked={logInCloseClicked}/>}

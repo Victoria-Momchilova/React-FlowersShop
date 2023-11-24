@@ -2,8 +2,11 @@ import Button from './Button.jsx'
 import ProductLabel from './ProductLabel.jsx'
 import './Product.css'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import ProductsContext from '../../contexts/productsContext.js';
 
 export default function Product(props) {
+    const {addProduct} = useContext(ProductsContext);
     let src;
 
     switch (props.category) {
@@ -26,7 +29,7 @@ export default function Product(props) {
 
     const addToCart = (event, id) => {
         let product = {'id': id, 'quantity': 1 };
-        props.onAddProductToCart(product);
+        addProduct(product);
     }
     
     return (

@@ -2,11 +2,11 @@ import Product from './MainElements/Product.jsx'
 import Button from './MainElements/Button.jsx'
 import './FeaturedProducts.css'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import ProductsContext from '../contexts/productsContext.js';
 
 export default function FeaturedProducts(props) {
-    const addProductToCart = (addedProduct) => {
-        props.onClickProduct(addedProduct);
-    }
+    const {products} = useContext(ProductsContext);
     
     return (
         <section className='featured-products'>
@@ -22,7 +22,7 @@ export default function FeaturedProducts(props) {
             <div className='container-fluid'>
                 <div className='row'>
                   
-                    {props.products.map(product => {
+                    {products.map(product => {
                         if(product.featured != undefined) {
                             return  (<Product 
                                 className='col-12 col-md-4 col-lg-3'
@@ -33,7 +33,6 @@ export default function FeaturedProducts(props) {
                                 price={product.price} 
                                 label={true}
                                 category={product.category}
-                                onAddProductToCart={addProductToCart}
                             />)
                         }
                         return null;
