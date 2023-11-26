@@ -6,121 +6,21 @@ import Productpage from './pages/Productpage.jsx'
 import Profile from './pages/Profile.jsx'
 import Registerpage from './pages/Registerpage.jsx'
 import Footer from './components/Footer.jsx'
-import * as productService from './services/productService.js'
-import * as authService from './services/authService.js'
-import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import AuthContext from './contexts/authContext.js'
-import ProductsContext from './contexts/productsContext.js'
+
+
+import { Route, Routes } from 'react-router-dom'
+import { AuthProvider } from './contexts/authContext.jsx'
+import { ProductsProvider } from './contexts/productsContext.jsx'
 
 
 function App() {
   // Products
-  const [shuffleProducts, setShuffleProducts] = useState([]);
-  const [cartProducts, setCartProducts] = useState([]);
- 
-  const removeProduct = (id) => {
-    const remainedProducts = cartProducts.filter((product)=>{
-        return product.product.id != id;
-    });
-
-    setCartProducts(remainedProducts);
-  }
-
-  const addProduct = (product) => {
-    let findProduct = shuffleProducts.filter((p)=>{
-      return p.id === product.id;
-    });
-
-    let isProductInCart = cartProducts.filter((p)=>{
-      return p.product.id === product.id;
-    });
-
-    if(isProductInCart.length > 0){
-      setCartProducts((oldProducts)=>{
-          const result = oldProducts.map((productset)=>{
-              if(productset.product.id === product.id) {
-                  const quantity = productset.quantity + product.quantity;
-                  return {...productset, quantity: quantity}
-              } 
-              return productset;
-          })
-          return result;
-      });
-    } else {
-      let findProductSet = {product: findProduct[0], quantity: product.quantity};
-      setCartProducts((oldProducts)=>{
-          return [...oldProducts, findProductSet];
-      });
-    }
-  }
-
-  const setQuantity = (id, newquantity) => {
-    if(newquantity != 0) {
-      setCartProducts((oldProducts)=>{
-        const result = oldProducts.map((productset)=>{
-            if(productset.product.id === id) {
-                const quantity = (newquantity);
-                return {...productset, quantity: quantity}
-            } 
-            return productset;
-        })
-        return result;
-    });
-    } else {
-      removeProduct(id);
-    }
-  } 
-
-  useEffect (()=>{
-    productService.getAll()
-      .then(result => setShuffleProducts(result.sort(() => Math.random() - 0.5)))
-      .catch(error => console.log(error));
-  }, []);
-
-  // Auth
-  const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
-
-  const loginSubmitHandler = async (values) => {
-    await authService.login(values)
-      .then(result => setAuth(result))
-      .catch(error => console.log(error));
-  }
-
-  const registerSubmitHandler = async (values) => {
-    await authService.register(values)
-      .then(result=>setAuth(result))
-      .catch(error => console.log(error));
-    navigate('/');
-  }
-
-  const logoutSubmitHandler = async () => {
-    await authService.logout(auth.accessToken)
-      .then(result=>setAuth({}))
-      .catch(error => console.log(error));
-  }
-
-  const autValues = {
-    loginSubmitHandler,
-    registerSubmitHandler,
-    logoutSubmitHandler,
-    ...auth,
-    isAuth: !!auth.email,
-  }
-
-  const productsValues = {
-    products: shuffleProducts,
-    cartProductsVal: cartProducts,
-    addProduct,
-    removeProduct,
-    setQuantity
-  }
+  
 
   return (
     <div>
-      <AuthContext.Provider value={autValues}>
-        <ProductsContext.Provider value={productsValues}>
+      <AuthProvider>
+        <ProductsProvider>
           <Header />
           <MainBackground />
           <Routes>
@@ -136,8 +36,8 @@ function App() {
           
           
           <Footer />
-        </ProductsContext.Provider>
-      </AuthContext.Provider>
+        </ProductsProvider>
+      </AuthProvider>
     </div>
   )
 }

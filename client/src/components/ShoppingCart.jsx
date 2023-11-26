@@ -2,7 +2,7 @@ import './ShoppingCart.css'
 import WhiteBg from "./MainElements/WhiteBg.jsx"
 import Button from './MainElements/Button'
 import { useContext, useEffect, useState } from 'react'
-import ProductsContext from '../contexts/productsContext.js'
+import ProductsContext from '../contexts/productsContext.jsx'
 
 export default function ShoppingCart(props) {
     const {cartProductsVal, addProduct, removeProduct, setQuantity} = useContext(ProductsContext);
@@ -50,7 +50,6 @@ export default function ShoppingCart(props) {
                 </div>
                 <div className="shopping-cart">
                     {cartProducts.length === 0 ? <div className='empty'>Чантата е празна!</div> : cartProducts.map(({product, quantity}, index)=>{
-                        console.log(product);
                         return (
                             <div className='cart-product-wrap' key={product.id}>
                                 <img src={`/${product.imageurl}`}/>

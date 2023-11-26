@@ -3,7 +3,7 @@ import ProductLabel from './ProductLabel.jsx'
 import './Product.css'
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import ProductsContext from '../../contexts/productsContext.js';
+import ProductsContext from '../../contexts/productsContext.jsx';
 
 export default function Product(props) {
     const {addProduct} = useContext(ProductsContext);

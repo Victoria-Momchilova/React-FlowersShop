@@ -3,7 +3,7 @@ import Button from './MainElements/Button.jsx'
 import './FeaturedProducts.css'
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import ProductsContext from '../contexts/productsContext.js';
+import ProductsContext from '../contexts/productsContext.jsx';
 
 export default function FeaturedProducts(props) {
     const {products} = useContext(ProductsContext);

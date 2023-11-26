@@ -4,7 +4,7 @@ import Product from './MainElements/Product.jsx'
 import Button from "./MainElements/Button.jsx";
 import './OurStore.css'
 import products from "../assets/products.js";
-import ProductsContext from "../contexts/productsContext.js";
+import ProductsContext from "../contexts/productsContext.jsx";
 
 export default function OurStore(props) {
     const {products} = useContext(ProductsContext);
