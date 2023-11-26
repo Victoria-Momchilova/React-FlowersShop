@@ -27,11 +27,18 @@ export const AuthProvider = ({children}) => {
         .then(result=>setAuth({}))
         .catch(error => console.log(error));
     }
+
+    const editSubmitHandler = async (values) => {
+      await authService.setEditProfile(values, auth.accessToken)
+        .then(result=>console.log(result))
+        .catch(error=>console.log(error));
+    }
   
     const autValues = {
       loginSubmitHandler,
       registerSubmitHandler,
       logoutSubmitHandler,
+      editSubmitHandler,
       ...auth,
       isAuth: !!auth.email,
     }

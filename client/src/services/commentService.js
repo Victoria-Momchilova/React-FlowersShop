@@ -46,7 +46,7 @@ export const setEditComment = async (data, token) => {
     const body = {
         "_id": data._id,
         "productId": data.productId,
-        "name": data.name,
+        // "name": data.name,
         "imageurl": data.imageurl,
         "text": data.text
     };

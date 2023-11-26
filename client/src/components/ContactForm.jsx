@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./ContactForm.css";
 import Button from "./MainElements/Button";
+import AuthContext from "../contexts/authContext";
+import * as authService from '../services/authService'
 
 const formInitialState = {
     firstname: '',
@@ -36,7 +38,7 @@ const formRegex = {
 }
 
 export default function ContactForm(props) {
-    
+    const {isAuth, accessToken} = useContext(AuthContext);
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const [shippingAddress, setShippingAddress] = useState(false);
@@ -155,6 +157,14 @@ export default function ContactForm(props) {
         }
         
     }
+
+    useEffect(()=>{
+        if(isAuth) {
+            authService.getEditProfile(accessToken)
+                .then(result => setFormValues(result))
+                .catch(error=>console.log(error));
+        }
+    }, [isAuth]);
 
     return (
         <form className="contact-form" ref={props.formRef} onSubmit={onSubmitForm}>

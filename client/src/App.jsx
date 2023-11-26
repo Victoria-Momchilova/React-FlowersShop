@@ -28,11 +28,8 @@ function App() {
             <Route path='/products' element={<Store />} />
             <Route path='/products/:id' element={<Productpage />} />
             <Route path='/register' element={<Registerpage />} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
-          {/* <Profile /> */}
-          
-          
-          
           <Footer />
         </ProductsProvider>
       </AuthProvider>
