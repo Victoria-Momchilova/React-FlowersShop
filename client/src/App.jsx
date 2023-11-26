@@ -14,11 +14,9 @@ import { ProductsProvider } from './contexts/productsContext.jsx'
 
 
 function App() {
-  // Products
-  
 
   return (
-    <div>
+    
       <AuthProvider>
         <ProductsProvider>
           <Header />
@@ -38,7 +36,7 @@ function App() {
           <Footer />
         </ProductsProvider>
       </AuthProvider>
-    </div>
+    
   )
 }
 
