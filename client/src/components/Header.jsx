@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import './Header.css'
 import HeaderMenu from './HeaderMenu';
 import ShoppingCart from './ShoppingCart'
-import LogIn from './LogIn';
 import { useState, useEffect, useContext } from "react";
 import AuthContext from '../contexts/authContext';
 import ProfileMenu from './ProfileMenu';
 import ProductsContext from '../contexts/productsContext';
+import LogInModal from './LogInModal';
 
 
 export default function Header() {
@@ -92,7 +92,7 @@ export default function Header() {
                cartCloseClicked={cartCloseClicked} 
             />}
             {headerMenuOpened && <HeaderMenu headerMenuCloseClicked={headerMenuCloseClicked}/>}
-            {logInOpened && <LogIn logInCloseClicked={logInCloseClicked}/>}
+            {logInOpened && <LogInModal logInCloseClicked={logInCloseClicked}/>}
             {/* // TODO Profile menu links */}
             {profileOpend && <ProfileMenu profileCloseClicked={profileCloseClicked}/>}
         </header>

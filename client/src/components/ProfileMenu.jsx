@@ -21,7 +21,8 @@ export default function ProfileMenu(props) {
     return (
         <WhiteBg className={styles.profileMenuWrap}>
             <Button handleButton={closeProfileHandler} className={`${styles.closeLogIn} small white`} text="x"/>
-            <div onClick={logoutSubmitHandler}>Изход</div>
+            <Link to="/profile" className={styles.link}>Профил</Link>
+            <div className={styles.link} onClick={logoutSubmitHandler}>Изход</div>
         </WhiteBg>
     )
 }

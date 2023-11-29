@@ -11,6 +11,7 @@ import Footer from './components/Footer.jsx'
 import { Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './contexts/authContext.jsx'
 import { ProductsProvider } from './contexts/productsContext.jsx'
+import Loginpage from './pages/Loginpage.jsx'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path='/products/:id' element={<Productpage />} />
             <Route path='/register' element={<Registerpage />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/login' element={<Loginpage />} />
           </Routes>
           <Footer />
         </ProductsProvider>

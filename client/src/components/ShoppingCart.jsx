@@ -3,8 +3,11 @@ import WhiteBg from "./MainElements/WhiteBg.jsx"
 import Button from './MainElements/Button'
 import { useContext, useEffect, useState } from 'react'
 import ProductsContext from '../contexts/productsContext.jsx'
+import AuthContext from '../contexts/authContext.jsx'
+import { Link } from 'react-router-dom'
 
 export default function ShoppingCart(props) {
+    const {isAuth, user} = useContext(AuthContext);
     const {cartProductsVal, addProduct, removeProduct, setQuantity} = useContext(ProductsContext);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -31,6 +34,14 @@ export default function ShoppingCart(props) {
     const changeQuantity = (e, id) => {
         setQuantity(id, Number(e.target.value));
     }   
+
+    const submitOrder = () => {
+        let order = {
+            products: cartProducts,
+            user: user,
+        }
+        console.log(order);
+    }
     
     useEffect(()=>{
         setCartProducts(cartProductsVal);
@@ -66,7 +77,8 @@ export default function ShoppingCart(props) {
                 </div>
                 <div className='shopping-cart-total'>
                     <div className='price'>Общо: {totalPrice} лв.</div>
-                    <Button className="" text="Завърши поръчката"/>
+                    {isAuth && <Button className="" text="Завърши поръчката" handleButton={submitOrder}/>}
+                    {!isAuth && <Link to="/login"><Button className="white" text="Влез за да завършиш поръчката"/></Link>}
                 </div>
             </div>
            

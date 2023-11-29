@@ -1,0 +1,19 @@
+.login-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.login-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.login-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.login-content form {
+    margin-top: 25px;
+}
