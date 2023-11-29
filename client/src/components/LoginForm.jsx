@@ -10,7 +10,7 @@ const formInitialState = {
 }
 
 export default function LoginForm() {
-    const {loginSubmitHandler} = useContext(AuthContext);
+    const {loginSubmitHandler, loginError} = useContext(AuthContext);
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
     const location = useLocation();
@@ -49,7 +49,7 @@ export default function LoginForm() {
                     onBlur={validateInput}
                     value={formValues.email}
                 />
-                {errors.email && <div className="input-error">Въвели сте грешен email</div>}
+                {/* {errors.email && <div className="input-error">Въвели сте грешен email</div>} */}
             </div>
             <div className={`${styles.fgroup} form-group`}>
                 <label htmlFor="logpassword">Парола </label>
@@ -63,8 +63,10 @@ export default function LoginForm() {
                     onBlur={validateInput}
                     value={formValues.password}
                 />
-                {errors.password && <div className="input-error">Въвели сте грешна парола</div>}
+                {/* {errors.password && <div className="input-error">Въвели сте грешна парола</div>} */}
+                {loginError !== '' ? <div className={styles.inputError}>{loginError}</div> : ''}
             </div>
+            
             <Button handleButton={onLogIn} text="Влез" />
             <span> или <Link to="/register"><Button text="се регистрирай" className="white" /></Link></span>
         </form>

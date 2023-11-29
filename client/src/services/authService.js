@@ -16,6 +16,10 @@ export const login = async (data) => {
 
     const result = await response.json();
 
+    if(result.code === 403) {
+        throw result.message;
+    }
+    
     return result;
 };
 

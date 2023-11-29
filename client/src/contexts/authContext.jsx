@@ -8,11 +8,15 @@ const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
     const [auth, setAuth] = useState({});
+    const [loginError, setLoginError] = useState('');
   
     const loginSubmitHandler = async (values) => {
       await authService.login(values)
-        .then(result => setAuth(result))
-        .catch(error => console.log(error));
+        .then((result) => {
+          setAuth(result);
+          setLoginError('');
+        })
+        .catch(error => setLoginError(error));
     }
   
     const registerSubmitHandler = async (values) => {
@@ -39,6 +43,7 @@ export const AuthProvider = ({children}) => {
       registerSubmitHandler,
       logoutSubmitHandler,
       editSubmitHandler,
+      loginError: loginError,
       user: auth,
       ...auth,
       isAuth: !!auth.email,

@@ -22,3 +22,8 @@
 .fgroup {
     margin-bottom: 10px;
 }
+
+.inputError {
+    font-size: 12px;
+    color: red;
+}

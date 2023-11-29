@@ -69,6 +69,7 @@
 }
 
 .shopping-cart-wrap .shopping-cart .cart-product-wrap .cart-product-quantity-wrap {
+    min-width: 110px;
     margin-left: auto;
 }
 
