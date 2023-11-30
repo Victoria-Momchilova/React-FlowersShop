@@ -112,10 +112,6 @@ export default function OurStore(props) {
         setSearchInput(e.target.value);
     }
 
-    const addProductToCart = (addedProduct) => {
-        props.onClickProduct(addedProduct);
-    }
-
     useEffect(()=>{
         if(searchInput.length > 0) {
             setFilteredProducts(products.filter((product)=>{
@@ -194,7 +190,6 @@ export default function OurStore(props) {
                                         price={product.price} 
                                         label={product.enviroment ? true : false}
                                         enviroment={product.enviroment}
-                                        onAddProductToCart={addProductToCart}
                                     />)
                             })}
 
