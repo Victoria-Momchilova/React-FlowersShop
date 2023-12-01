@@ -1,0 +1,10 @@
+.order-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.order-wrap .address-wrap {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}

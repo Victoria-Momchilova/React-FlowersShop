@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './contexts/authContext.jsx'
 import { ProductsProvider } from './contexts/productsContext.jsx'
 import Loginpage from './pages/Loginpage.jsx'
+import Orderpage from './pages/Orderpage.jsx'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path='/register' element={<Registerpage />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/login' element={<Loginpage />} />
+            <Route path='/order' element={<Orderpage />} />
           </Routes>
           <Footer />
         </ProductsProvider>
