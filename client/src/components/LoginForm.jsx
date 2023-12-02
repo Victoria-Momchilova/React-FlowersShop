@@ -1,6 +1,6 @@
 import Button from './MainElements/Button'
 import { useContext, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../contexts/authContext'
 import styles from './LogInModal.module.css'
 
@@ -13,7 +13,6 @@ export default function LoginForm() {
     const {loginSubmitHandler, loginError} = useContext(AuthContext);
     const [formValues, setFormValues] = useState(formInitialState);
     const [errors, setErrors] = useState({});
-    const location = useLocation();
     const navigate = useNavigate();
 
     const changeHandler = (e) => {
@@ -29,10 +28,7 @@ export default function LoginForm() {
 
     const onLogIn = async (e) => {
         e.preventDefault();
-        loginSubmitHandler(formValues);
-        if(location.pathname === '/login') {
-            navigate(-1);
-        }
+        loginSubmitHandler(formValues);       
     }
 
     return (

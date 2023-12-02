@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import * as authService from '../services/authService.js'
 
@@ -9,12 +9,16 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
     const [auth, setAuth] = useState({});
     const [loginError, setLoginError] = useState('');
+    const location = useLocation();
   
     const loginSubmitHandler = async (values) => {
       await authService.login(values)
         .then((result) => {
           setAuth(result);
           setLoginError('');
+          if(location.pathname === '/login') {
+            navigate(-1);
+          }
         })
         .catch(error => setLoginError(error));
     }
