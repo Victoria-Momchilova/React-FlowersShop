@@ -3,16 +3,21 @@ import WhiteBg from '../components/MainElements/WhiteBg'
 import Button from "./MainElements/Button";
 import { useRef, useContext } from "react";
 import AuthContext from "../contexts/authContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Order.css'
+import ProductsContext from "../contexts/productsContext";
 
 export default function Order() {
     const {isAuth, user} = useContext(AuthContext);
+    const {clearCart} = useContext(ProductsContext);
     const orderRef = useRef(null);
+    const navigate = useNavigate();
 
     const onSubmitHandler = (value) => {
         if (orderRef.current) {
             orderRef.current.submitOrder();
+            clearCart();
+            navigate('/orders');
         }
     }
 

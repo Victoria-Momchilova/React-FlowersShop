@@ -61,6 +61,10 @@ export const ProductsProvider = ({children}) => {
         }
     } 
 
+    const clearCart = () => {
+        setCartProducts([]);
+    }
+
     useEffect (()=>{
         productService.getAll()
         .then(result => setShuffleProducts(result.sort(() => Math.random() - 0.5)))
@@ -72,7 +76,8 @@ export const ProductsProvider = ({children}) => {
         cartProductsVal: cartProducts,
         addProduct,
         removeProduct,
-        setQuantity
+        setQuantity,
+        clearCart
     }
 
     return(
