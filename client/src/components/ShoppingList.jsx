@@ -3,20 +3,24 @@ import Button from './MainElements/Button'
 import AuthContext from '../contexts/authContext.jsx'
 import ProductsContext from '../contexts/productsContext.jsx'
 import './ShoppingCart.css'
+import * as orderService from '../services/orderService.js'
 
 export default function ShoppingList(props) {
-    const {isAuth, user} = useContext(AuthContext);
+    const {isAuth, user, accessToken} = useContext(AuthContext);
     const {cartProductsVal, addProduct, removeProduct, setQuantity} = useContext(ProductsContext);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useImperativeHandle(props.orderRef, () => ({
-        submitOrder() {
+        async submitOrder() {
             let order = {
                 products: cartProducts,
                 user: user,
             }
-            console.log(order);
+            
+            await orderService.setNewOrder(order, accessToken)
+                .then(result=>console.log(result))
+                .catch(error=>console.log(error));
         }
     }))
 
