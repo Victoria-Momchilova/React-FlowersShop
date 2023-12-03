@@ -13,7 +13,7 @@ export default function FeaturedProducts(props) {
             <div className='container'>
                 <div className='row'>
                     <div className='heading-wrap col-10'>
-                        <h2>Нови продукти</h2>
+                        <h2>Препоръчани продукти</h2>
                         <div className="separator"></div>
                         <h3>We love our plants!</h3>
                     </div>
