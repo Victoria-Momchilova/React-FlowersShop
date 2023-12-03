@@ -4,13 +4,14 @@ import AuthContext from '../contexts/authContext.jsx'
 import ProductsContext from '../contexts/productsContext.jsx'
 import './ShoppingCart.css'
 import * as orderService from '../services/orderService.js'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function ShoppingList(props) {
     const {isAuth, user, accessToken} = useContext(AuthContext);
-    const {cartProductsVal, addProduct, removeProduct, setQuantity} = useContext(ProductsContext);
+    const {cartProductsVal, addProduct, removeProduct, setQuantity, clearCart} = useContext(ProductsContext);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const navigate = useNavigate();
 
     useImperativeHandle(props.orderRef, () => ({
         async submitOrder() {
@@ -20,7 +21,11 @@ export default function ShoppingList(props) {
             }
             
             await orderService.setNewOrder(order, accessToken)
-                .then(result=>console.log(result))
+                .then(result=>{
+                    console.log(result);
+                    clearCart();
+                    navigate('/orders');
+                })
                 .catch(error=>console.log(error));
         }
     }))
