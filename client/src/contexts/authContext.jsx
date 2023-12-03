@@ -17,7 +17,7 @@ export const AuthProvider = ({children}) => {
           setAuth(result);
           setLoginError('');
           if(location.pathname === '/login') {
-            navigate(-1);
+            navigate('/order');
           }
         })
         .catch(error => setLoginError(error));
