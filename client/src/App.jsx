@@ -14,6 +14,7 @@ import { ProductsProvider } from './contexts/productsContext.jsx'
 import Loginpage from './pages/Loginpage.jsx'
 import Orderpage from './pages/Orderpage.jsx'
 import AuthGuard from './components/AuthGuard.jsx'
+import UserOrderspage from './pages/UserOrderspage.jsx'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
             <Route element={<AuthGuard />}>
               <Route path='/profile' element={<Profile />} />
+              <Route path='/orders' element={<UserOrderspage />} />
               <Route path='/order' element={<Orderpage />} />
             </Route>
           </Routes>

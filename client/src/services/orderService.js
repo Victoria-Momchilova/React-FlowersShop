@@ -1,5 +1,16 @@
 const ordersURL = 'http://localhost:3030/data/orders';
 
+export const getAllOrders = async (id) => {
+    const query = new URLSearchParams({
+        where: `_ownerId="${id}"`,
+    });
+    const response = await fetch(`${ordersURL}?${query}`);
+    const result = await response.json();
+
+    const data = result;
+    return data;
+};
+
 export const setNewOrder = async (data, token) => {
     const body = {
         "products": data.products,

@@ -1,0 +1,23 @@
+.orders-wrap {
+    padding-top: 75px;
+    padding-bottom: 150px;
+}
+
+.orders-content h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.orders-content .separator {
+    width: 70px;
+    height: 2px;
+    background-color: black;
+}
+
+.orders-content .order-row {
+    padding: 25px 10px;
+}
+
+.orders-content .order-row + .order-row {
+    border-top: 1px solid #cecece;
+}
