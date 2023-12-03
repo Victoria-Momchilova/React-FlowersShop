@@ -13,6 +13,7 @@ import { AuthProvider } from './contexts/authContext.jsx'
 import { ProductsProvider } from './contexts/productsContext.jsx'
 import Loginpage from './pages/Loginpage.jsx'
 import Orderpage from './pages/Orderpage.jsx'
+import AuthGuard from './components/AuthGuard.jsx'
 
 
 function App() {
@@ -29,10 +30,13 @@ function App() {
             <Route path='/contact-us' element={<Homepage />} />
             <Route path='/products' element={<Store />} />
             <Route path='/products/:id' element={<Productpage />} />
-            <Route path='/register' element={<Registerpage />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/register' element={<Registerpage />} />            
             <Route path='/login' element={<Loginpage />} />
-            <Route path='/order' element={<Orderpage />} />
+
+            <Route element={<AuthGuard />}>
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/order' element={<Orderpage />} />
+            </Route>
           </Routes>
           <Footer />
         </ProductsProvider>
