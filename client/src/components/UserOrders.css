@@ -18,6 +18,12 @@
     padding: 25px 10px;
 }
 
-.orders-content .order-row + .order-row {
+.orders-content a + a {
     border-top: 1px solid #cecece;
+}
+
+.orders-content a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
