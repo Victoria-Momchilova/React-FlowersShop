@@ -27,7 +27,7 @@ export default function UserOrders() {
                         <div className="separator"></div>
                         {orders.length > 0 ? orders.map(order=>{
                             return(
-                                <Link to={`/orders/${order._id}`}><div className="order-row">Поръчка {order._id}</div></Link>
+                                <Link to={`/orders/${order._id}`} key={order._id}><div className="order-row">Поръчка {order._id}</div></Link>
                             )
                         }) : <div className="order-row"> Няма направени поръчки </div>}
                         
