@@ -4,6 +4,7 @@ import AuthContext from '../contexts/authContext.jsx'
 import ProductsContext from '../contexts/productsContext.jsx'
 import './ShoppingCart.css'
 import * as orderService from '../services/orderService.js'
+import { Link } from 'react-router-dom'
 
 export default function ShoppingList(props) {
     const {isAuth, user, accessToken} = useContext(AuthContext);
@@ -69,8 +70,10 @@ export default function ShoppingList(props) {
                 {cartProducts.length === 0 ? <div className='empty'>Чантата е празна!</div> : cartProducts.map(({ product, quantity }, index) => {
                     return (
                         <div className='cart-product-wrap' key={product.id}>
-                            <img src={`/${product.imageurl}`} />
-                            <div className='cart-product-name'>{product.name}</div>
+                            <Link to={`/products/${product.id}`} className="link-wrap">
+                                <img src={`/${product.imageurl}`} />
+                                <div className='cart-product-name'>{product.name}</div>
+                            </Link>
                             <div className='cart-product-quantity-wrap'>
                                 <label className='cart-product-quantity-label' htmlFor={"quantity-" + product.id}>Брой:</label>
                                 <input className='cart-product-quantity' type="number" id={"quantity-" + product.id} name='quantity' value={quantity} onChange={(e) => { changeQuantity(e, product.id) }} />
