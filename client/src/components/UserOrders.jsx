@@ -4,6 +4,7 @@ import { useState } from "react";
 import AuthContext from "../contexts/authContext";
 import WhiteBg from "./MainElements/WhiteBg";
 import './UserOrders.css'
+import { Link } from "react-router-dom";
 
 export default function UserOrders() {
     const {_id} = useContext(AuthContext);
@@ -12,10 +13,7 @@ export default function UserOrders() {
 
     useEffect(()=>{
         orderService.getAllOrders(_id)
-            .then(result=>{
-                console.log(result)
-                setOrders(result);
-            })
+            .then(result=>setOrders(result))
             .catch(error=>console.log(error));
 
     }, []);
@@ -29,7 +27,7 @@ export default function UserOrders() {
                         <div className="separator"></div>
                         {orders.length > 0 ? orders.map(order=>{
                             return(
-                                <div className="order-row">Поръчка {order._id}</div>
+                                <Link to={`/orders/${order._id}`}><div className="order-row">Поръчка {order._id}</div></Link>
                             )
                         }) : <div className="order-row"> Няма направени поръчки </div>}
                         

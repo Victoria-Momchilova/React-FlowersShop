@@ -30,3 +30,10 @@ export const setNewOrder = async (data, token) => {
     
     return result;
 };
+
+export const getOrder = async (id) => {
+    const response = await fetch(`${ordersURL}/${id}`);
+    const result = await response.json();
+
+    return result;
+};

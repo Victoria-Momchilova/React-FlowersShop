@@ -6,15 +6,16 @@ import Productpage from './pages/Productpage.jsx'
 import Profile from './pages/Profile.jsx'
 import Registerpage from './pages/Registerpage.jsx'
 import Footer from './components/Footer.jsx'
-
-
-import { Route, Routes } from 'react-router-dom'
-import { AuthProvider } from './contexts/authContext.jsx'
-import { ProductsProvider } from './contexts/productsContext.jsx'
 import Loginpage from './pages/Loginpage.jsx'
 import Orderpage from './pages/Orderpage.jsx'
 import AuthGuard from './components/AuthGuard.jsx'
 import UserOrderspage from './pages/UserOrderspage.jsx'
+import UserOrderpage from './pages/UserOrderpage.jsx'
+
+import { Route, Routes } from 'react-router-dom'
+import { AuthProvider } from './contexts/authContext.jsx'
+import { ProductsProvider } from './contexts/productsContext.jsx'
+
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route element={<AuthGuard />}>
               <Route path='/profile' element={<Profile />} />
               <Route path='/orders' element={<UserOrderspage />} />
+              <Route path='/orders/:id' element={<UserOrderpage />} />
               <Route path='/order' element={<Orderpage />} />
             </Route>
           </Routes>
